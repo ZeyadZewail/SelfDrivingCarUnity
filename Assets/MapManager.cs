@@ -28,13 +28,20 @@ public class MapManager : MonoBehaviour
 
         for(int i =0; i < 4 ; i++){
             for(int j = 0; j<4;j++){
-
-                Tilemap tempW = Instantiate(tilemaps[0]);
-                Tilemap tempO = Instantiate(tilemaps[1]);
+                int max = 8;
+                int r = Random.Range(0, max);
+                if (r % 2 != 0)
+                    r += 1;
+                Tilemap tempW = Instantiate(tilemaps[r]);
+                Tilemap tempO = Instantiate(tilemaps[r+1]);
                 tempW.transform.SetParent(grid.transform);
                 tempO.transform.SetParent(grid.transform);
-                tempW.transform.position = new Vector3(tempW.transform.position.x +(21*i),tempW.transform.position.y+(21*j));
-                tempO.transform.position = new Vector3(tempO.transform.position.x +(21*i),tempO.transform.position.y + (21*j));
+                float temp1W = tempW.transform.localPosition.x + (21 * i);
+                float temp2W = tempW.transform.localPosition.y + (21 * j);
+                float temp1O = tempO.transform.localPosition.x + (21 * i);
+                float temp2O = tempO.transform.localPosition.y + (21 * j);
+                tempW.transform.position = new Vector3(temp1W, temp2W);
+                tempO.transform.position = new Vector3(temp1O, temp2O);
 
 
             }
@@ -49,18 +56,18 @@ public class MapManager : MonoBehaviour
 
 
 
-
-
         this.GetComponent<NavMeshSurface2d>().BuildNavMesh();
-        
-        
-        
+
+
+
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+   
     }
 }
